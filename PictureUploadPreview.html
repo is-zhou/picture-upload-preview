@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./common/common.css" />
+    <style>
+      #preview {
+        width: 300px;
+        height: 400px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: hidden;
+      }
+      div input {
+        width: 100%;
+        height: 60px;
+        background-color: brown;
+        opacity: 0;
+        margin-bottom: 5px;
+      }
+      /* 文件选择框伪样式 */
+      #pseudo-style {
+        width: 100%;
+        height: 60px;
+        border-radius: 10px;
+        background-color: brown;
+        position: absolute;
+        top: 0;
+        color: #ffffff;
+        font-size: 18px;
+        text-align: center;
+        line-height: 60px;
+        z-index: -100;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">web前端-超简单图片上传并预览10行JS搞定</div>
+
+    <!-- 选择图片上传控件 -->
+    <div id="preview">
+      <input type="file" name="" id="file" value="上传文件" />
+      <div id="pseudo-style">选择图片上传</div>
+    </div>
+
+    <script>
+      var preview = document.getElementById("preview");
+      var img = document.createElement("img"); // 创建图片预览img元素
+      var file = document.getElementById("file");
+      /* 文件选择监听事件 */
+      file.onchange = function() {
+        /* 文件读取对象读取文件 */
+        var fileReader = new FileReader();
+        fileReader.readAsDataURL(this.files[0]);
+        fileReader.onload = function() {
+          img.src = fileReader.result;
+          img.style.width = "300px";
+          preview.appendChild(img);
+        };
+      };
+    </script>
+  </body>
+</html>
